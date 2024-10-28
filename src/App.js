@@ -11,6 +11,8 @@ function App() {
     setPlayers(data);
   }, []);
 
+  
+
   return (
     <div className="App">
       <h1>Player Dashboard</h1>

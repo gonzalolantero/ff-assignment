@@ -9,22 +9,28 @@ function PlayerTable() {
       <thead>
         <tr>
           <th>Player</th>
+          <th>Dribble Skills</th>
+          <th>Length</th>
+          <th>Weight</th>
+          <th>Age</th>
+          <th>Ball Control</th>
+          <th>Passing Under Pressure</th>
           <th>Team</th>
           <th>Position</th>
-          <th>Dribble Skill (s)</th>
-          <th>Ball Control</th>
-          <th>Age</th>
         </tr>
       </thead>
       <tbody>
         {players.map((player) => (
           <tr key={player.Player}>
             <td>{player.Player}</td>
+            <td>{player.DribbleSkills}</td>
+            <td>{player.Length}</td>
+            <td>{player.Weight}</td>
+            <td>{player.Age}</td>
+            <td>{player.BallControl}</td>
+            <td>{player.PassingUnderPressure}</td>
             <td>{player.Team}</td>
             <td>{player.Position}</td>
-            <td>{player.DribbleSkill}</td>
-            <td>{player.BallControl}</td>
-            <td>{player.Age}</td>
           </tr>
         ))}
       </tbody>
