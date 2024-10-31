@@ -1,8 +1,9 @@
 import React from 'react'
+import PlayerTable from './PlayerTable'
 
 function Dashboard() {
   return (
-    <div>this is dashboard</div>
+    <div><PlayerTable /></div>
   )
 }
 

@@ -2,6 +2,8 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { Outlet } from 'react-router-dom'
 import Sidebar from './Sidebar'
+import Header from './Header'
+import PlayerTable from '../PlayerTable'
 
 export class Layout extends Component {
   static propTypes = {}
@@ -11,6 +13,8 @@ export class Layout extends Component {
         <div className='flex flex-row bg-neutral-100 h-screen w-screen overflow-hidden'>
             <Sidebar />
             <div className='p-4'>
+                <Header />
+                <PlayerTable />
                 <div>{<Outlet />}</div>
             </div>
         </div>
