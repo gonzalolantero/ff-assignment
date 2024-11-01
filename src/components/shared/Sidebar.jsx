@@ -8,8 +8,8 @@ function Sidebar({ filters, setFilters }) {
     dribbleSkills: { min: 0, max: 100 },
     age: { min: 0, max: 40 },
     ballControl: { min: 0, max: 100 },
-    length: { min: 100, max: 210 },
-    weight: { min: 50, max: 120 },
+    length: { min: 0, max: 210 },
+    weight: { min: 0, max: 120 },
     passingUnderPressure: { min: 0, max: 100 },
   };
 
@@ -110,7 +110,7 @@ function Sidebar({ filters, setFilters }) {
         onChange={(values) => handleSliderChange("passingUnderPressure", values)}
       />
 
-      <div>
+      <div className="mb-6">
         <label className="block mb-2">Team</label>
         <select
           value={teamFilter}
@@ -125,7 +125,8 @@ function Sidebar({ filters, setFilters }) {
           ))}
         </select>
       </div>
-      <div>
+      
+      <div className="mb-6">
         <label className="block mb-2">Position</label>
         <select
           value={positionFilter}
