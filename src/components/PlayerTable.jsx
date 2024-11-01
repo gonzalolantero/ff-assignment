@@ -2,14 +2,11 @@
 import React, { useState } from "react";
 import { usePlayers } from "../context/PlayerContext";
 
-function PlayerTable({ filters }) {
+function PlayerTable({ filters, searchTerm }) {
   const players = usePlayers();
-
-  // State to track current sorting column and order
   const [sortColumn, setSortColumn] = useState(null);
   const [sortOrder, setSortOrder] = useState("asc");
 
-  // Function to handle sorting logic when a header is clicked
   function handleHeaderClick(column) {
     if (sortColumn === column) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
@@ -19,41 +16,26 @@ function PlayerTable({ filters }) {
     }
   }
 
-  // Function to sort players array based on sortColumn and sortOrder
   const sortedPlayers = [...players].sort((a, b) => {
     if (!sortColumn) return 0;
-
     let valueA = a[sortColumn];
     let valueB = b[sortColumn];
-
-    // Special case for sorting "Player" column numerically
     if (sortColumn === "Player") {
       valueA = parseInt(valueA.replace("Player ", ""), 10);
       valueB = parseInt(valueB.replace("Player ", ""), 10);
     }
-
     if (valueA < valueB) return sortOrder === "asc" ? -1 : 1;
     if (valueA > valueB) return sortOrder === "asc" ? 1 : -1;
     return 0;
   });
 
-  // Filtering based on the provided filters
+  // Filter by both player name (search term) and other attribute filters
   const filteredPlayers = sortedPlayers.filter(player => {
     const {
-      minDribbleSkills,
-      maxDribbleSkills,
-      minAge,
-      maxAge,
-      minBallControl,
-      maxBallControl,
-      minLength,
-      maxLength,
-      minWeight,
-      maxWeight,
-      minPassingUnderPressure,
-      maxPassingUnderPressure,
-      team,
-      position,
+      minDribbleSkills, maxDribbleSkills, minAge, maxAge,
+      minBallControl, maxBallControl, minLength, maxLength,
+      minWeight, maxWeight, minPassingUnderPressure, maxPassingUnderPressure,
+      team, position
     } = filters;
 
     return (
@@ -69,30 +51,21 @@ function PlayerTable({ filters }) {
       (maxWeight === undefined || player.Weight <= maxWeight) &&
       (minPassingUnderPressure === undefined || player.PassingUnderPressure >= minPassingUnderPressure) &&
       (maxPassingUnderPressure === undefined || player.PassingUnderPressure <= maxPassingUnderPressure) &&
-      (!team || player.Team === team) && // Team filter
-      (!position || player.Position === position) // Position filter
+      (!team || player.Team === team) &&
+      (!position || player.Position === position) &&
+      (!searchTerm || player.Player.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   });
 
   return (
-    <table className="min-w-full border border-separate">
+    <table className="min-w-full bg-neutral-800 text-neutral-100 border-collapse border border-neutral-700 shadow-md">
       <thead>
         <tr>
-          {[
-            "Player",
-            "DribbleSkills",
-            "Length",
-            "Weight",
-            "Age",
-            "BallControl",
-            "PassingUnderPressure",
-            "Team",
-            "Position",
-          ].map((column) => (
+          {["Player", "DribbleSkills", "Length", "Weight", "Age", "BallControl", "PassingUnderPressure", "Team", "Position"].map(column => (
             <th
               key={column}
               onClick={() => handleHeaderClick(column)}
-              className="px-4 py-2 cursor-pointer text-left"
+              className="px-4 py-2 text-sm font-semibold text-neutral-200 border-b border-neutral-700 bg-neutral-900 cursor-pointer hover:bg-neutral-700 transition-colors"
             >
               {column} {sortColumn === column ? (sortOrder === "asc" ? "↑" : "↓") : ""}
             </th>
@@ -100,17 +73,22 @@ function PlayerTable({ filters }) {
         </tr>
       </thead>
       <tbody>
-        {filteredPlayers.map((player) => (
-          <tr key={player.Player}>
-            <td>{player.Player}</td>
-            <td>{player.DribbleSkills}</td>
-            <td>{player.Length}</td>
-            <td>{player.Weight}</td>
-            <td>{player.Age}</td>
-            <td>{player.BallControl}</td>
-            <td>{player.PassingUnderPressure}</td>
-            <td>{player.Team}</td>
-            <td>{player.Position}</td>
+        {filteredPlayers.map((player, index) => (
+          <tr
+            key={player.Player}
+            className={`text-center transition-colors ${
+              index % 2 === 0 ? "bg-neutral-800" : "bg-neutral-700"
+            } hover:bg-neutral-600`}
+          >
+            <td className="px-4 py-2 border-b border-neutral-700">{player.Player}</td>
+            <td className="px-4 py-2 border-b border-neutral-700">{player.DribbleSkills}</td>
+            <td className="px-4 py-2 border-b border-neutral-700">{player.Length}</td>
+            <td className="px-4 py-2 border-b border-neutral-700">{player.Weight}</td>
+            <td className="px-4 py-2 border-b border-neutral-700">{player.Age}</td>
+            <td className="px-4 py-2 border-b border-neutral-700">{player.BallControl}</td>
+            <td className="px-4 py-2 border-b border-neutral-700">{player.PassingUnderPressure}</td>
+            <td className="px-4 py-2 border-b border-neutral-700">{player.Team}</td>
+            <td className="px-4 py-2 border-b border-neutral-700">{player.Position}</td>
           </tr>
         ))}
       </tbody>

@@ -6,7 +6,7 @@ function Sidebar({ filters, setFilters }) {
   // Default ranges for each attribute
   const DEFAULT_RANGES = {
     dribbleSkills: { min: 0, max: 100 },
-    age: { min: 0, max: 40 },
+    age: { min: 0, max: 16 },
     ballControl: { min: 0, max: 100 },
     length: { min: 0, max: 210 },
     weight: { min: 0, max: 120 },
@@ -45,7 +45,7 @@ function Sidebar({ filters, setFilters }) {
     setTeamFilter(selectedTeam);
     setFilters((prev) => ({
       ...prev,
-      team: selectedTeam || undefined, // Set to undefined if no team is selected
+      team: selectedTeam || undefined,
     }));
   };
 
@@ -54,7 +54,7 @@ function Sidebar({ filters, setFilters }) {
     setPositionFilter(selectedPosition);
     setFilters((prev) => ({
       ...prev,
-      position: selectedPosition || undefined, // Set to undefined if no position is selected
+      position: selectedPosition || undefined,
     }));
   };
 
