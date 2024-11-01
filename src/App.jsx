@@ -1,7 +1,7 @@
 // App.js or your main component
 import React, { useState } from 'react';
 import Header from './components/shared/Header';
-import PlayerTable from './components/PlayerTable';
+import PlayerTable from './components/shared/PlayerTable';
 import Sidebar from './components/shared/Sidebar';
 
 function App() {
