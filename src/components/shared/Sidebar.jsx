@@ -4,6 +4,7 @@ import SliderGroup from '../helpers/SliderGroup';
 import SelectFilter from '../helpers/SelectFilter';
 import useSliderValues from '../../hooks/useSliderValues';
 import useFilterHandlers from '../../hooks/useFilterHandlers';
+import { Link } from "react-router-dom";
 
 function Sidebar({ filters, setFilters }) {
   const DEFAULT_RANGES = {
@@ -52,6 +53,11 @@ function Sidebar({ filters, setFilters }) {
         options={uniquePositions}
         onChange={handlePositionChange}
       />
+
+      <div className="mt-auto text-center text-sm">
+        Made by Gonzalo Lantero :D
+        <a href= "mailto: gonzalantero@gmail.com" className="text-blue-200 underline"> gonzalantero@gmail.com </a>
+      </div>
     </div>
   );
 }
