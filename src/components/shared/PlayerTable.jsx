@@ -8,7 +8,6 @@ function PlayerTable({ filters, searchTerm }) {
   const { sortColumn, sortOrder, handleHeaderClick, sortedData } = useSort();
 
   const sortedPlayers = sortedData(players);
-
   const filteredPlayers = useFilter(sortedPlayers, filters, searchTerm);
 
   return (
